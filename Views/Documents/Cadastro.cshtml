@@ -1,0 +1,16 @@
+@using TesteCadastro.Models;
+@model Documents
+@{
+    ViewData["title"] = "Cadastro";
+}
+
+<form method="POST" asp-action="Cadastro" class="container-form">
+    <div>
+        <label asp-for="titulo">Título</label>
+        <input asp-for="titulo" />
+    </div>
+    <div>
+        <button type="submit">Cadastro</button>
+    </div>
+
+</form>
