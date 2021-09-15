@@ -22,7 +22,7 @@ namespace TesteCadastro.Models
 
             Comando.Parameters.AddWithValue("@codigo", documents.codigo);
             Comando.Parameters.AddWithValue("@titulo", documents.titulo);
-            Comando.Parameters.AddWithValue("@processo", documents.processo);
+            //Comando.Parameters.AddWithValue("@processo", documents.processo);
             Comando.Parameters.AddWithValue("@categoria", documents.categoria);
             Comando.ExecuteNonQuery();
             Conexao.Close();
