@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TesteCadastro.Models;
-
+using System.Collections.Generic;
 namespace TesteCadastro.Controllers
 {
     public class DocumentsController : Controller
@@ -8,7 +8,16 @@ namespace TesteCadastro.Controllers
         public IActionResult Cadastro()
         {
 
-            return View();
+            DocumentsRepository ur = new DocumentsRepository();
+            List<Processo> list = ur.Listagem();
+
+            Documents doc = new Documents();
+
+            doc.processos = list;
+
+            return View(doc);
+
+
         }
 
         [HttpPost]
@@ -16,8 +25,16 @@ namespace TesteCadastro.Controllers
         {
             DocumentsRepository ur = new DocumentsRepository();
             ur.Cadastro(documents);
-            return View();
+            return RedirectToAction("Cadastro");
         }
+
+        //public IActionResult Litagem()
+        //{
+
+        //   return View();
+
+
+        //}
 
     }
 }
