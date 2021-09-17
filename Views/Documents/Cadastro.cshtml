@@ -1,9 +1,8 @@
 @using TesteCadastro.Models;
 @model Documents
+@using Microsoft.AspNetCore.Mvc;
 
-
-
-<form method="POST" asp-action="Cadastro" class="container-form">
+<form method="POST" asp-action="Cadastro" class="container-form" id="frm">
 
     <div>
         <div>
@@ -15,10 +14,14 @@
             <input asp-for="categoria" />
         </div>
         <select asp-for="processo" asp-items="@(new SelectList(Model.processos, "id", "name"))">
-            <option>Processo</option>
+            <option value="0">Processo</option>
         </select>
     </div>
     <div>
         <button type="submit">Cadastro</button>
-    </div>
+        @if (TempData["alerta"] != null)
+        {
+            <p>@TempData["alerta"]</p>
+        }
+
 </form>

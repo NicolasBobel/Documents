@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using MySqlConnector;
 using System.Collections.Generic;
 
@@ -15,11 +16,14 @@ namespace TesteCadastro.Models
 
             MySqlConnection Conexao = new MySqlConnection(DadosConexao);
             Conexao.Open();
-            String Query = "INSERT INTO informaçoes (codigo,titulo,categoria,processo) VALUES ";
-            Query = Query + "(@codigo,@titulo,@categoria,@processo)";
-            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
 
-            Comando.Parameters.AddWithValue("@codigo", documents.codigo);
+            StringBuilder query = new StringBuilder();
+
+            query.Append("INSERT INTO informaçoes (titulo,categoria,processo) VALUES");
+            query.Append("(@titulo,@categoria,@processo)");
+
+            MySqlCommand Comando = new MySqlCommand(query.ToString(), Conexao);
+
             Comando.Parameters.AddWithValue("@titulo", documents.titulo);
             Comando.Parameters.AddWithValue("@categoria", documents.categoria);
             Comando.Parameters.AddWithValue("@processo", documents.processo);
@@ -53,8 +57,6 @@ namespace TesteCadastro.Models
                 listagem.Add(processoEncontrado);
             }
             Conexao.Close();
-
-
             return listagem;
         }
     }

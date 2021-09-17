@@ -41,6 +41,10 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[1.3.12, )"
+            },
+            "Serilog.Extensions.Logging.File": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             }
           },
           "imports": [

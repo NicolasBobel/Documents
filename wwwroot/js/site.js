@@ -1,4 +1,16 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function Cadastro(evt) {
+  console.log(evt);
 
-// Write your JavaScript code.
+  if ($("#titulo").val() == "") {
+    alert("titulo não informado");
+    evt.preventDefault();
+  } else if ($("#categoria").val() == "") {
+    alert("categoria não informada");
+    evt.preventDefault();
+  } else if ($("#processo").val() == "0") {
+    alert("processo não informado");
+    evt.preventDefault();
+  }
+}
+
+$("#frm").on("submit", Cadastro);
