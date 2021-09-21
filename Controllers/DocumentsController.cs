@@ -45,13 +45,12 @@ namespace TesteCadastro.Controllers
 
         }
 
-        //public IActionResult Litagem()
-        //{
-
-        //   return View();
-
-
-        //}
+        public IActionResult Lista()
+        {
+            DocumentsRepository dr = new DocumentsRepository();
+            List<Documents> Lista = dr.Lista();
+            return View(Lista);
+        }
 
     }
 }

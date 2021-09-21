@@ -59,5 +59,43 @@ namespace TesteCadastro.Models
             Conexao.Close();
             return listagem;
         }
+        public List<Documents> Lista()
+        {
+
+            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
+            Conexao.Open();
+
+            String Query = "SELECT * FROM informaçoes ORDER BY titulo";
+            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
+            MySqlDataReader Reader = Comando.ExecuteReader();
+
+            List<Documents> lista = new List<Documents>();
+
+            while (Reader.Read())
+            {
+
+                Documents documentsEncontrado = new Documents();
+
+                if (!Reader.IsDBNull(Reader.GetOrdinal("codigo")))
+                    documentsEncontrado.codigo = Reader.GetInt32("codigo");
+
+                if (!Reader.IsDBNull(Reader.GetOrdinal("titulo")))
+                    documentsEncontrado.titulo = Reader.GetString("titulo");
+
+                if (!Reader.IsDBNull(Reader.GetOrdinal("categoria")))
+                    documentsEncontrado.categoria = Reader.GetString("categoria");
+
+                if (!Reader.IsDBNull(Reader.GetOrdinal("processo")))
+                    documentsEncontrado.processo = Reader.GetInt32("processo");
+
+                lista.Add(documentsEncontrado);
+            }
+
+            Conexao.Close();
+            return lista;
+        }
+
+
     }
+
 }

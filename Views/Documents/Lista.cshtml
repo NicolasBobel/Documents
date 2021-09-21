@@ -1,0 +1,25 @@
+@using TesteCadastro.Models;
+@model IEnumerable<Documents>
+
+
+<table class="table table-primary table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Título</th>
+            <th scope="col">Categoria</th>
+            <th scope="col"> Processo</th>
+        </tr>
+    </thead>
+
+
+    @foreach (Documents documents in Model)
+    {
+        <tr>
+            <td>@documents.codigo</td>
+            <td>@documents.titulo</td>
+            <td>@documents.categoria</td>
+            <td>@documents.processo</td>
+        </tr>
+    }
+</table>
