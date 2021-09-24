@@ -19,14 +19,15 @@ namespace TesteCadastro.Models
 
             StringBuilder query = new StringBuilder();
 
-            query.Append("INSERT INTO informaçoes (titulo,categoria,processo) VALUES");
-            query.Append("(@titulo,@categoria,@processo)");
+            query.Append("INSERT INTO informaçoes (titulo,categoria,processo,codigo) VALUES");
+            query.Append("(@titulo,@categoria,@processo,@codigo)");
 
             MySqlCommand Comando = new MySqlCommand(query.ToString(), Conexao);
 
             Comando.Parameters.AddWithValue("@titulo", documents.titulo);
             Comando.Parameters.AddWithValue("@categoria", documents.categoria);
             Comando.Parameters.AddWithValue("@processo", documents.processo);
+            Comando.Parameters.AddWithValue("@codigo", documents.codigo);
             Comando.ExecuteNonQuery();
             Conexao.Close();
 
@@ -94,6 +95,44 @@ namespace TesteCadastro.Models
             Conexao.Close();
             return lista;
         }
+        public void Editar(Documents documents)
+        {
+
+            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
+            Conexao.Open();
+            String Query = "UPDATE informaçoes SET codigo=@codigo WHERE Id=@Id;";
+            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
+
+            Comando.Parameters.AddWithValue("@codigo", documents.codigo);
+
+            Comando.ExecuteNonQuery();
+            Conexao.Close();
+        }
+
+
+        public Documents buscarPorCodigo(int codigo)
+        {
+
+            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
+            Conexao.Open();
+
+            String Query = "SELECT * FROM informaçoes WHERE codigo=@codigo";
+            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
+            Comando.Parameters.AddWithValue("@codigo", codigo);
+
+            MySqlDataReader Reader = Comando.ExecuteReader();
+
+            Documents documentsEncontrado = new Documents();
+            if (Reader.Read())
+            {
+
+                documentsEncontrado.codigo = Reader.GetInt32("codigo");
+            }
+
+            Conexao.Close();
+            return documentsEncontrado;
+        }
+
 
 
     }

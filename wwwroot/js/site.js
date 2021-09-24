@@ -10,6 +10,9 @@
   } else if ($("#processo").val() == "0") {
     alert("processo não informado");
     evt.preventDefault();
+  } else if ($("#codigo").val() == "0") {
+    alert("codigo não informado");
+    evt.preventDefault();
   }
 }
 

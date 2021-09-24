@@ -1,0 +1,21 @@
+@using TesteCadastro.Models;
+@model Documents
+@{
+    ViewData["title"] = "Editar";
+
+}
+
+
+<form method="POST" asp-action="Editar">
+
+
+    <input type="hidden" asp-action="codigo">
+
+    <div>
+        <label asp-for="codigo">Codigo</label>
+        <input asp-for="codigo" />
+        <input type="submit" value="Editar">
+    </div>
+
+
+</form>

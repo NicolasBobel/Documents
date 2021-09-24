@@ -2,9 +2,13 @@
 @model Documents
 @using Microsoft.AspNetCore.Mvc;
 
-<form method="POST" asp-action="Cadastro" class="container-form" id="frm">
+<form method="POST" asp-action="Cadastro" class="container-form" id="frm" enctype="multipart/form-data">
 
     <div>
+        <div>
+            <label asp-for="codigo">codigo</label>
+            <input asp-for="codigo" />
+        </div>
         <div>
             <label asp-for="titulo">Título</label>
             <input asp-for="titulo" />
@@ -17,11 +21,12 @@
             <option value="0">Processo</option>
         </select>
     </div>
+    <input type="file" asp-for="postedFiles" />
     <div>
         <button type="submit">Cadastro</button>
         @if (TempData["alerta"] != null)
         {
             <p>@TempData["alerta"]</p>
         }
-
+    </div>
 </form>

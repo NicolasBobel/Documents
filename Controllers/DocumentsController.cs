@@ -3,43 +3,64 @@ using TesteCadastro.Models;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+
 namespace TesteCadastro.Controllers
 {
     public class DocumentsController : Controller
     {
         private readonly ILogger<DocumentsController> _logger;
+        private IWebHostEnvironment Environment;
 
-        public DocumentsController(ILogger<DocumentsController> logger)
+
+        public DocumentsController(IWebHostEnvironment _environment, ILogger<DocumentsController> logger)
         {
+            Environment = _environment;
             _logger = logger;
         }
+
+
         public IActionResult Cadastro()
         {
-
             DocumentsRepository ur = new DocumentsRepository();
             List<Processo> list = ur.Listagem();
-
             Documents doc = new Documents();
-
             doc.processos = list;
-
             return View(doc);
         }
 
         [HttpPost]
-        public IActionResult Cadastro(Documents documents)
+        public IActionResult Cadastro(Documents document)
         {
-
             try
             {
                 DocumentsRepository ur = new DocumentsRepository();
-                ur.Cadastro(documents);
+                ur.Cadastro(document);
+
+                string wwwPath = this.Environment.WebRootPath;
+
+                string path = Path.Combine(this.Environment.WebRootPath, "UploadedFiles", document.codigo.ToString());
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string fileName = Path.GetFileName(document.postedFiles.FileName);
+                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                {
+                    document.postedFiles.CopyTo(stream);
+                }
+
                 TempData["alerta"] = "Cadastrado com sucesso";
                 return RedirectToAction("Cadastro");
             }
             catch (Exception e)
             {
                 _logger.LogError(e.Message);
+                TempData["alerta"] = "Falha no Cadastro, Código duplicado";
                 return RedirectToAction("Cadastro");
             }
 
@@ -51,6 +72,21 @@ namespace TesteCadastro.Controllers
             List<Documents> Lista = dr.Lista();
             return View(Lista);
         }
+        public IActionResult Editar(int codigo)
+        {
 
+            DocumentsRepository dr = new DocumentsRepository();
+            Documents documentsBuscado = dr.buscarPorCodigo(codigo);
+            return View(documentsBuscado);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Documents documents)
+        {
+            DocumentsRepository dr = new DocumentsRepository();
+            dr.Editar(documents);
+            return RedirectToAction("Lista");
+
+        }
     }
 }
