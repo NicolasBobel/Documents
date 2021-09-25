@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 
+using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace TesteCadastro.Controllers
 {
     public class DocumentsController : Controller
@@ -66,11 +67,16 @@ namespace TesteCadastro.Controllers
 
         }
 
-        public IActionResult Lista()
+        public IActionResult Lista(Documents document)
         {
+
+
             DocumentsRepository dr = new DocumentsRepository();
             List<Documents> Lista = dr.Lista();
             return View(Lista);
+
+
+
         }
         public IActionResult Editar(int codigo)
         {
@@ -87,6 +93,23 @@ namespace TesteCadastro.Controllers
             dr.Editar(documents);
             return RedirectToAction("Lista");
 
+        }
+        public FileResult DownloadFile(Documents document)
+        {
+
+            string path = Path.Combine(this.Environment.WebRootPath, "UploadedFiles", document.codigo.ToString());
+
+            string[] file = Directory.GetFiles(path);
+
+
+            byte[] bytes = System.IO.File.ReadAllBytes(file[0]);
+
+
+            string ext = Path.GetExtension(file[0]);
+            string myFilePath = @"C:\Arquivo." + ext;
+
+
+            return File(bytes, "application/octet-stream", myFilePath);
         }
     }
 }

@@ -46,3 +46,4 @@ C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Sinks.Async.dll
 C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Sinks.File.dll
 C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Sinks.RollingFile.dll
 C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\Razor\Views\Documents\Lista.cshtml.g.cs
+C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\Razor\Views\Documents\Editar.cshtml.g.cs

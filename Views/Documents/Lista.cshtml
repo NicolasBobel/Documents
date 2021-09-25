@@ -1,5 +1,6 @@
 @using TesteCadastro.Models;
 @model IEnumerable<Documents>
+@using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
 <table class="table table-primary table-striped">
@@ -9,6 +10,7 @@
             <th scope="col">Título</th>
             <th scope="col">Categoria</th>
             <th scope="col"> Processo</th>
+
         </tr>
     </thead>
 
@@ -20,6 +22,12 @@
             <td>@documents.titulo</td>
             <td>@documents.categoria</td>
             <td>@documents.processo</td>
+            <td>
+            <td><a type="button" class="btn btn-primary" asp-controller="Documents" asp-action="DownloadFile"
+                asp-route-codigo="@documents.codigo">Download</a>
+            </td>
+            </td>
+
 
         </tr>
     }

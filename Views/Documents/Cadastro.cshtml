@@ -21,7 +21,7 @@
             <option value="0">Processo</option>
         </select>
     </div>
-    <input type="file" asp-for="postedFiles" />
+    <input type="file" asp-for="postedFiles" accept=".pdf,.doc,.xls,.docx,.xlsx" />
     <div>
         <button type="submit">Cadastro</button>
         @if (TempData["alerta"] != null)
