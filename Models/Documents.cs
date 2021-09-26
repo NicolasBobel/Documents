@@ -15,7 +15,7 @@ namespace TesteCadastro.Models
 
         public string categoria { get; set; }
 
-        public int processo { get; set; }
+        public string processo { get; set; }
 
         public List<Processo> processos { get; set; }
 

@@ -48,9 +48,9 @@ namespace TesteCadastro.Models
             {
 
                 Processo processoEncontrado = new Processo();
-
                 if (!Reader.IsDBNull(Reader.GetOrdinal("id")))
-                    processoEncontrado.id = Reader.GetInt32("id");
+                    processoEncontrado.id = Reader.GetString("id");
+
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("name")))
                     processoEncontrado.name = Reader.GetString("name");
@@ -87,26 +87,13 @@ namespace TesteCadastro.Models
                     documentsEncontrado.categoria = Reader.GetString("categoria");
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("processo")))
-                    documentsEncontrado.processo = Reader.GetInt32("processo");
+                    documentsEncontrado.processo = Reader.GetString("processo");
 
                 lista.Add(documentsEncontrado);
             }
 
             Conexao.Close();
             return lista;
-        }
-        public void Editar(Documents documents)
-        {
-
-            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
-            Conexao.Open();
-            String Query = "UPDATE informaçoes SET codigo=@codigo WHERE Id=@Id;";
-            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
-
-            Comando.Parameters.AddWithValue("@codigo", documents.codigo);
-
-            Comando.ExecuteNonQuery();
-            Conexao.Close();
         }
 
 

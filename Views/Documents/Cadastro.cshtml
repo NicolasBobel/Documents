@@ -4,26 +4,27 @@
 
 <form method="POST" asp-action="Cadastro" class="container-form" id="frm" enctype="multipart/form-data">
 
-    <div>
-        <div>
-            <label asp-for="codigo">codigo</label>
+    <div class="form">
+        <div class="item-form">
+            <label asp-for="codigo">Código</label>
             <input asp-for="codigo" />
         </div>
-        <div>
+        <div class="item-form">
             <label asp-for="titulo">Título</label>
             <input asp-for="titulo" />
         </div>
-        <div>
+        <div class="item-form">
             <label asp-for="categoria">Categoria</label>
             <input asp-for="categoria" />
-        </div>
-        <select asp-for="processo" asp-items="@(new SelectList(Model.processos, "id", "name"))">
+        </div class="item-form">
+        <select asp-for="processo" asp-items="@(new SelectList(Model.processos, "id", "name"))" class="form-select"
+            style="width: 10rem;">
             <option value="0">Processo</option>
         </select>
     </div>
     <input type="file" asp-for="postedFiles" accept=".pdf,.doc,.xls,.docx,.xlsx" />
     <div>
-        <button type="submit">Cadastro</button>
+        <button type="submit" class="btn btn-primary">Cadastro</button>
         @if (TempData["alerta"] != null)
         {
             <p>@TempData["alerta"]</p>

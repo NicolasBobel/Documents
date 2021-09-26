@@ -7,7 +7,7 @@
   } else if ($("#categoria").val() == "") {
     alert("categoria não informada");
     evt.preventDefault();
-  } else if ($("#processo").val() == "0") {
+  } else if ($("#processo").val() == "") {
     alert("processo não informado");
     evt.preventDefault();
   } else if ($("#codigo").val() == "0") {

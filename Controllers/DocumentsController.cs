@@ -78,22 +78,7 @@ namespace TesteCadastro.Controllers
 
 
         }
-        public IActionResult Editar(int codigo)
-        {
 
-            DocumentsRepository dr = new DocumentsRepository();
-            Documents documentsBuscado = dr.buscarPorCodigo(codigo);
-            return View(documentsBuscado);
-        }
-
-        [HttpPost]
-        public IActionResult Editar(Documents documents)
-        {
-            DocumentsRepository dr = new DocumentsRepository();
-            dr.Editar(documents);
-            return RedirectToAction("Lista");
-
-        }
         public FileResult DownloadFile(Documents document)
         {
 
