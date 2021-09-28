@@ -60,6 +60,39 @@ namespace TesteCadastro.Models
             Conexao.Close();
             return listagem;
         }
+
+        public List<categoria> ListarCategoriaPorIdProcesso(string idProcesso)
+        {
+
+            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
+            Conexao.Open();
+
+            String Query = $"SELECT * FROM categoria WHERE idProcesso={idProcesso}";
+            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
+            MySqlDataReader Reader = Comando.ExecuteReader();
+
+            List<categoria> ListarCategoriaPorIdProcesso = new List<categoria>();
+
+            while (Reader.Read())
+            {
+
+                categoria IdProcessoEncontrado = new categoria();
+                if (!Reader.IsDBNull(Reader.GetOrdinal("id")))
+                    IdProcessoEncontrado.id = Reader.GetString("id");
+
+
+                if (!Reader.IsDBNull(Reader.GetOrdinal("name")))
+                    IdProcessoEncontrado.name = Reader.GetString("name");
+
+
+                if (!Reader.IsDBNull(Reader.GetOrdinal("idProcesso")))
+                    IdProcessoEncontrado.idProcesso = Reader.GetString("idProcesso");
+
+                ListarCategoriaPorIdProcesso.Add(IdProcessoEncontrado);
+            }
+            Conexao.Close();
+            return ListarCategoriaPorIdProcesso;
+        }
         public List<Documents> Lista()
         {
 
@@ -94,30 +127,6 @@ namespace TesteCadastro.Models
 
             Conexao.Close();
             return lista;
-        }
-
-
-        public Documents buscarPorCodigo(int codigo)
-        {
-
-            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
-            Conexao.Open();
-
-            String Query = "SELECT * FROM informaçoes WHERE codigo=@codigo";
-            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
-            Comando.Parameters.AddWithValue("@codigo", codigo);
-
-            MySqlDataReader Reader = Comando.ExecuteReader();
-
-            Documents documentsEncontrado = new Documents();
-            if (Reader.Read())
-            {
-
-                documentsEncontrado.codigo = Reader.GetInt32("codigo");
-            }
-
-            Conexao.Close();
-            return documentsEncontrado;
         }
 
 
