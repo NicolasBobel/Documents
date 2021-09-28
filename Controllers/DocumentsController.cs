@@ -25,8 +25,9 @@ namespace TesteCadastro.Controllers
 
         public IActionResult Cadastro()
         {
-            DocumentsRepository ur = new DocumentsRepository();
-            List<Processo> list = ur.Listagem();
+            var documentsReponsitory = new DocumentsRepository();
+            List<Processo> list = documentsReponsitory.Listagem();
+            var categorias  = documentsReponsitory.ListarCategoriaPorIdProcesso("");
             Documents doc = new Documents();
             doc.processos = list;
             return View(doc);
