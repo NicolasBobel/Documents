@@ -9,127 +9,132 @@ namespace RegisterDocuments.Models
     public class DocumentsRepository
     {
 
-        private const string DadosConexao = "Database=documents;Data Source=localhost;User Id=root;Allow User Variables=true;";
+        private const string ConnectionOptions = "Database=documents;Data Source=localhost;User Id=root;Allow User Variables=true;";
 
-        public void Cadastro(Documents documents)
+        public void InsertDocument(Documents documents)
         {
 
-            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
-            Conexao.Open();
+            MySqlConnection Connection = new MySqlConnection(ConnectionOptions);
+            Connection.Open();
 
             StringBuilder query = new StringBuilder();
 
             query.Append("INSERT INTO informaçoes (titulo,categoria,processo,codigo) VALUES");
             query.Append("(@titulo,@categoria,@processo,@codigo)");
 
-            MySqlCommand Comando = new MySqlCommand(query.ToString(), Conexao);
+            MySqlCommand Comand = new MySqlCommand(query.ToString(), Connection);
 
-            Comando.Parameters.AddWithValue("@titulo", documents.titulo);
-            Comando.Parameters.AddWithValue("@categoria", documents.categoria);
-            Comando.Parameters.AddWithValue("@processo", documents.processo);
-            Comando.Parameters.AddWithValue("@codigo", documents.codigo);
-            Comando.ExecuteNonQuery();
-            Conexao.Close();
+            Comand.Parameters.AddWithValue("@titulo", documents.title);
+            Comand.Parameters.AddWithValue("@categoria", documents.category);
+            Comand.Parameters.AddWithValue("@processo", documents.process);
+            Comand.Parameters.AddWithValue("@codigo", documents.code);
+            Comand.ExecuteNonQuery();
+            Connection.Close();
 
         }
-        public List<Processo> Listagem()
+        public List<Process> ProcessList()
         {
+            MySqlConnection Connection = new MySqlConnection(ConnectionOptions);
 
-            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
-            Conexao.Open();
+            Connection.Open();
 
             String Query = "SELECT * FROM processo";
-            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
-            MySqlDataReader Reader = Comando.ExecuteReader();
 
-            List<Processo> listagem = new List<Processo>();
+            MySqlCommand Comand = new MySqlCommand(Query, Connection);
+            MySqlDataReader Reader = Comand.ExecuteReader();
+
+            List<Process> processList = new List<Process>();
 
             while (Reader.Read())
             {
 
-                Processo processoEncontrado = new Processo();
+                Process process = new Process();
+
                 if (!Reader.IsDBNull(Reader.GetOrdinal("id")))
-                    processoEncontrado.id = Reader.GetString("id");
+                    process.id = Reader.GetString("id");
 
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("name")))
-                    processoEncontrado.name = Reader.GetString("name");
+                    process.name = Reader.GetString("name");
 
-                listagem.Add(processoEncontrado);
+                processList.Add(process);
             }
-            Conexao.Close();
-            return listagem;
+
+            Connection.Close();
+
+            return processList;
         }
 
-        public List<categoria> ListarCategoriaPorIdProcesso(string idProcesso)
+        public List<Category> FindCategoryListByProcessId(string idProcesso)
         {
 
-            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
-            Conexao.Open();
+            MySqlConnection Connection = new MySqlConnection(ConnectionOptions);
+            Connection.Open();
 
             String Query = $"SELECT * FROM categoria WHERE idProcesso={idProcesso}";
-            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
-            MySqlDataReader Reader = Comando.ExecuteReader();
+            MySqlCommand Comand = new MySqlCommand(Query, Connection);
+            MySqlDataReader Reader = Comand.ExecuteReader();
 
-            List<categoria> ListarCategoriaPorIdProcesso = new List<categoria>();
+            List<Category> categoryList = new List<Category>();
 
             while (Reader.Read())
             {
 
-                categoria IdProcessoEncontrado = new categoria();
+                Category category = new Category();
+
                 if (!Reader.IsDBNull(Reader.GetOrdinal("id")))
-                    IdProcessoEncontrado.id = Reader.GetString("id");
+                    category.id = Reader.GetString("id");
 
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("name")))
-                    IdProcessoEncontrado.name = Reader.GetString("name");
+                    category.name = Reader.GetString("name");
 
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("idProcesso")))
-                    IdProcessoEncontrado.idProcesso = Reader.GetString("idProcesso");
+                    category.processId = Reader.GetString("idProcesso");
 
-                ListarCategoriaPorIdProcesso.Add(IdProcessoEncontrado);
+                categoryList.Add(category);
             }
-            Conexao.Close();
-            return ListarCategoriaPorIdProcesso;
-        }
-        public List<Documents> Lista()
-        {
+            Connection.Close();
 
-            MySqlConnection Conexao = new MySqlConnection(DadosConexao);
-            Conexao.Open();
+            return categoryList;
+        }
+        public List<Documents> ListOrderByTitle()
+        {
+            MySqlConnection Connection = new MySqlConnection(ConnectionOptions);
+            Connection.Open();
 
             String Query = "SELECT * FROM informaçoes ORDER BY titulo";
-            MySqlCommand Comando = new MySqlCommand(Query, Conexao);
-            MySqlDataReader Reader = Comando.ExecuteReader();
 
-            List<Documents> lista = new List<Documents>();
+            MySqlCommand Comand = new MySqlCommand(Query, Connection);
+            MySqlDataReader Reader = Comand.ExecuteReader();
+
+            List<Documents> documentList = new List<Documents>();
 
             while (Reader.Read())
             {
 
-                Documents documentsEncontrado = new Documents();
+                Documents documents = new Documents();
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("codigo")))
-                    documentsEncontrado.codigo = Reader.GetInt32("codigo");
+                    documents.code = Reader.GetInt32("codigo");
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("titulo")))
-                    documentsEncontrado.titulo = Reader.GetString("titulo");
+                    documents.title = Reader.GetString("titulo");
 
                 if (!Reader.IsDBNull(Reader.GetOrdinal("categoria")))
-                    documentsEncontrado.categoria = Reader.GetString("categoria");
+                    documents.category = Reader.GetString("categoria");
 
-                if (!Reader.IsDBNull(Reader.GetOrdinal("processo")))
-                    documentsEncontrado.processo = Reader.GetString("processo");
+                if (!Reader.IsDBNull(Reader.GetOrdinal("Processo")))
+                    documents.process = Reader.GetString("Processo");
 
-                lista.Add(documentsEncontrado);
+                documentList.Add(documents);
             }
 
-            Conexao.Close();
-            return lista;
+            Connection.Close();
+
+            return documentList;
         }
-
-
 
     }
 

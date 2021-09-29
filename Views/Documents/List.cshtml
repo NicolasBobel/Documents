@@ -18,13 +18,13 @@
     @foreach (Documents documents in Model)
     {
         <tr>
-            <td>@documents.codigo</td>
-            <td>@documents.titulo</td>
-            <td>@documents.categoria</td>
-            <td>@documents.processo</td>
+            <td>@documents.code</td>
+            <td>@documents.title</td>
+            <td>@documents.category</td>
+            <td>@documents.process</td>
             <td>
             <td><a type="button" class="btn btn-primary" asp-controller="Documents" asp-action="DownloadFile"
-                asp-route-codigo="@documents.codigo">Download</a>
+                asp-route-code="@documents.code">Download</a>
             </td>
             </td>
 

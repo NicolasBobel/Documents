@@ -9,15 +9,15 @@ namespace RegisterDocuments.Models
 
         public int Id { get; set; }
 
-        public int codigo { get; set; }
+        public int code { get; set; }
 
-        public string titulo { get; set; }
+        public string title { get; set; }
 
-        public string categoria { get; set; }
+        public string category { get; set; }
 
-        public string processo { get; set; }
+        public string process { get; set; }
 
-        public List<Processo> processos { get; set; }
+        public List<Process> processList { get; set; }
 
         public IFormFile postedFiles { get; set; }
 

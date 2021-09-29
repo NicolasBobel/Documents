@@ -4,7 +4,7 @@ namespace RegisterDocuments.Models
 {
 
 
-    public class Processo
+    public class Process
     {
 
         public string name { get; set; }

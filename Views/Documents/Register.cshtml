@@ -2,19 +2,19 @@
 @model Documents
 @using Microsoft.AspNetCore.Mvc;
 
-<form method="POST" asp-action="Cadastro" class="container-form" id="frm" enctype="multipart/form-data">
+<form method="POST" asp-action="Register" class="container-form" id="frm" enctype="multipart/form-data">
 
     <div class="form">
         <div class="item-form">
-            <label asp-for="codigo">Código</label>
-            <input asp-for="codigo" />
+            <label asp-for="code">Código</label>
+            <input asp-for="code" />
         </div>
         <div class="item-form">
-            <label asp-for="titulo">Título</label>
-            <input asp-for="titulo" />
+            <label asp-for="title">Título</label>
+            <input asp-for="title" />
         </div>
         <div class="item-form">
-            <select asp-for="processo" asp-items="@(new SelectList(Model.processos, "id", "name"))" class="form-select"
+            <select asp-for="process" asp-items="@(new SelectList(Model.processList, "id", "name"))" class="form-select"
                 style="width: 10rem;">
                 <option value="" disabled selected>Processo </option>
             </select>
@@ -22,9 +22,9 @@
         <input type="file" asp-for="postedFiles" accept=".pdf,.doc,.xls,.docx,.xlsx,.txt" />
         <div>
             <button type="submit" class="btn btn-primary">Cadastro</button>
-            @if (TempData["alerta"] != null)
+            @if (TempData["alert"] != null)
             {
-                <p>@TempData["alerta"]</p>
+                <p>@TempData["alert"]</p>
             }
         </div>
 </form>

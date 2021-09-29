@@ -13,38 +13,41 @@ namespace RegisterDocuments.Controllers
 {
     public class DocumentsController : Controller
     {
-        private readonly ILogger<DocumentsController> _logger;
-        private IWebHostEnvironment Environment;
+        private readonly ILogger<DocumentsController> logger;
+        private IWebHostEnvironment environment;
 
 
-        public DocumentsController(IWebHostEnvironment _environment, ILogger<DocumentsController> logger)
+        public DocumentsController(IWebHostEnvironment environment, ILogger<DocumentsController> logger)
         {
-            Environment = _environment;
-            _logger = logger;
+            this.environment = environment;
+            this.logger = logger;
         }
 
 
-        public IActionResult Cadastro()
+        public IActionResult Register()
         {
-            var documentsReponsitory = new DocumentsRepository();
-            List<Processo> list = documentsReponsitory.Listagem();
+            var documentsRepository = new DocumentsRepository();
+            List<Process> processList = documentsRepository.ProcessList();
+
             //var categorias = documentsReponsitory.ListarCategoriaPorIdProcesso("");
+
             Documents doc = new Documents();
-            doc.processos = list;
+            doc.processList = processList;
+
             return View(doc);
         }
 
         [HttpPost]
-        public IActionResult Cadastro(Documents document)
+        public IActionResult Register(Documents document)
         {
             try
             {
                 DocumentsRepository ur = new DocumentsRepository();
-                ur.Cadastro(document);
+                ur.InsertDocument(document);
 
-                string wwwPath = this.Environment.WebRootPath;
+                string wwwPath = this.environment.WebRootPath;
 
-                string path = Path.Combine(this.Environment.WebRootPath, "UploadedFiles", document.codigo.ToString());
+                string path = Path.Combine(this.environment.WebRootPath, "UploadedFiles", document.code.ToString());
 
                 if (!Directory.Exists(path))
                 {
@@ -57,44 +60,37 @@ namespace RegisterDocuments.Controllers
                     document.postedFiles.CopyTo(stream);
                 }
 
-                TempData["alerta"] = "Cadastrado com sucesso";
-                return RedirectToAction("Cadastro");
+                TempData["alert"] = "Cadastrado com sucesso";
+                return RedirectToAction("Register");
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
-                TempData["alerta"] = "Falha no Cadastro, Código duplicado";
-                return RedirectToAction("Cadastro");
+                logger.LogError(e.Message);
+                TempData["alert"] = "Falha no Cadastro, Código duplicado";
+                return RedirectToAction("Register");
             }
 
         }
 
-        public IActionResult Lista(Documents document)
+        public IActionResult List(Documents document)
         {
+            DocumentsRepository documentRepository = new DocumentsRepository();
+            List<Documents> documents = documentRepository.ListOrderByTitle();
 
-
-            DocumentsRepository dr = new DocumentsRepository();
-            List<Documents> Lista = dr.Lista();
-            return View(Lista);
-
-
-
+            return View(documents);
         }
 
         public FileResult DownloadFile(Documents document)
         {
 
-            string path = Path.Combine(this.Environment.WebRootPath, "UploadedFiles", document.codigo.ToString());
+            string path = Path.Combine(this.environment.WebRootPath, "UploadedFiles", document.code.ToString());
 
             string[] file = Directory.GetFiles(path);
 
-
             byte[] bytes = System.IO.File.ReadAllBytes(file[0]);
-
 
             string ext = Path.GetExtension(file[0]);
             string myFilePath = @"C:\Arquivo." + ext;
-
 
             return File(bytes, "application/octet-stream", myFilePath);
         }

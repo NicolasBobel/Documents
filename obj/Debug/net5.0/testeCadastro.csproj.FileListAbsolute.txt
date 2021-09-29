@@ -36,7 +36,6 @@ C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\testeCadastro.dll
 C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\ref\testeCadastro.dll
 C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\testeCadastro.pdb
 C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\testeCadastro.genruntimeconfig.cache
-C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\Razor\Views\Documents\Cadastro.cshtml.g.cs
 C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.dll
 C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
@@ -45,4 +44,5 @@ C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Formatting.Compa
 C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Sinks.Async.dll
 C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Sinks.File.dll
 C:\Users\nicol\Documents\testeCadastro\bin\Debug\net5.0\Serilog.Sinks.RollingFile.dll
-C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\Razor\Views\Documents\Lista.cshtml.g.cs
+C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\Razor\Views\Documents\List.cshtml.g.cs
+C:\Users\nicol\Documents\testeCadastro\obj\Debug\net5.0\Razor\Views\Documents\Register.cshtml.g.cs
