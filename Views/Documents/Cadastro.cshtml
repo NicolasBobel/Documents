@@ -1,4 +1,4 @@
-@using TesteCadastro.Models;
+@using RegisterDocuments.Models;
 @model Documents
 @using Microsoft.AspNetCore.Mvc;
 
@@ -13,22 +13,18 @@
             <label asp-for="titulo">Título</label>
             <input asp-for="titulo" />
         </div>
-    </div class="item-form">
-    <select asp-for="processo" asp-items="@(new SelectList(Model.processos, "id", "name"))" class="form-select"
-        style="width: 10rem;">
-        <option value="" disabled selected>Processo </option>
-    </select>
-    <select asp-for="categoria" asp-items="@(new SelectList(Model.categoria, "id", "name"))" class="form-select"
-        style="width: 10rem;">
-        <option value="" disabled selected>Processo </option>
-    </select>
-    </div>
-    <input type="file" asp-for="postedFiles" accept=".pdf,.doc,.xls,.docx,.xlsx,.txt" />
-    <div>
-        <button type="submit" class="btn btn-primary">Cadastro</button>
-        @if (TempData["alerta"] != null)
-        {
-            <p>@TempData["alerta"]</p>
-        }
-    </div>
+        <div class="item-form">
+            <select asp-for="processo" asp-items="@(new SelectList(Model.processos, "id", "name"))" class="form-select"
+                style="width: 10rem;">
+                <option value="" disabled selected>Processo </option>
+            </select>
+        </div>
+        <input type="file" asp-for="postedFiles" accept=".pdf,.doc,.xls,.docx,.xlsx,.txt" />
+        <div>
+            <button type="submit" class="btn btn-primary">Cadastro</button>
+            @if (TempData["alerta"] != null)
+            {
+                <p>@TempData["alerta"]</p>
+            }
+        </div>
 </form>

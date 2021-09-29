@@ -1,6 +1,6 @@
 using System;
 
-namespace TesteCadastro.Models
+namespace RegisterDocuments.Models
 {
 
 

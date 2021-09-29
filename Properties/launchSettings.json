@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "testeCadastro": {
+    "RegisterDocuments": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

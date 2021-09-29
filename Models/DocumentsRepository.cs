@@ -3,7 +3,7 @@ using System.Text;
 using MySqlConnector;
 using System.Collections.Generic;
 
-namespace TesteCadastro.Models
+namespace RegisterDocuments.Models
 {
 
     public class DocumentsRepository

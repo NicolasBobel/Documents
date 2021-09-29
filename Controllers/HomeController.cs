@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TesteCadastro.Models;
+using RegisterDocuments.Models;
 
-namespace TesteCadastro.Controllers
+namespace RegisterDocuments.Controllers
 {
     public class HomeController : Controller
     {
@@ -22,8 +22,8 @@ namespace TesteCadastro.Controllers
         {
             return View();
         }
-       
-        
+
+
 
     }
 }

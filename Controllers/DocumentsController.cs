@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using TesteCadastro.Models;
+using RegisterDocuments.Models;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
-namespace TesteCadastro.Controllers
+
+namespace RegisterDocuments.Controllers
 {
     public class DocumentsController : Controller
     {
@@ -27,7 +28,7 @@ namespace TesteCadastro.Controllers
         {
             var documentsReponsitory = new DocumentsRepository();
             List<Processo> list = documentsReponsitory.Listagem();
-            var categorias  = documentsReponsitory.ListarCategoriaPorIdProcesso("");
+            //var categorias = documentsReponsitory.ListarCategoriaPorIdProcesso("");
             Documents doc = new Documents();
             doc.processos = list;
             return View(doc);
