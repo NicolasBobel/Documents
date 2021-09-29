@@ -14,6 +14,10 @@
             <input asp-for="title" />
         </div>
         <div class="item-form">
+            <label asp-for="category">Categoria</label>
+            <input asp-for="category" />
+        </div>
+        <div class="item-form">
             <select asp-for="process" asp-items="@(new SelectList(Model.processList, "id", "name"))" class="form-select"
                 style="width: 10rem;">
                 <option value="" disabled selected>Processo </option>
